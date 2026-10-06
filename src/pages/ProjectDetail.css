@@ -1,0 +1,100 @@
+.project-detail__back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  margin-bottom: 24px;
+  transition: color var(--dur-fast) var(--ease-soft);
+}
+
+.project-detail__back svg {
+  transition: transform var(--dur-base) var(--ease-out);
+}
+
+/* Arrow leads the way back. */
+.project-detail__back:hover {
+  color: var(--color-primary);
+}
+
+.project-detail__back:hover svg {
+  transform: translateX(-3px);
+}
+
+.project-detail h1 {
+  max-width: 26ch;
+}
+
+.project-detail__thumb {
+  position: relative;
+  margin-top: 24px;
+  height: 260px;
+  border-radius: var(--radius-lg);
+  background: linear-gradient(135deg, var(--color-primary-tint), var(--color-accent-tint));
+  border: 1px solid var(--color-border);
+  display: grid;
+  place-items: center;
+  color: var(--color-text-muted);
+  font-size: 0.85rem;
+  overflow: hidden;
+  transition:
+    transform var(--dur-slow) var(--ease-out),
+    box-shadow var(--dur-slow) var(--ease-soft),
+    border-color var(--dur-base) var(--ease-soft);
+}
+
+/* Reveal from a slight scale-down, then lift on hover. */
+.project-detail__thumb {
+  animation: thumbReveal 0.7s var(--ease-out) both;
+}
+
+@keyframes thumbReveal {
+  from { opacity: 0; transform: scale3d(0.97, 0.97, 1); }
+  to { opacity: 1; transform: none; }
+}
+
+.project-detail__thumb:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-raised);
+}
+
+.project-detail__thumb::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 30% 20%, rgba(77, 163, 255, 0.28), transparent 45%),
+    radial-gradient(circle at 80% 80%, rgba(155, 108, 255, 0.22), transparent 50%);
+  transform: scale(1);
+  transition: transform 0.6s var(--ease-out);
+}
+
+.project-detail__thumb:hover::after {
+  transform: scale(1.06);
+}
+
+.project-detail__body {
+  margin-top: 32px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+.project-detail__note {
+  margin-top: 24px;
+  font-size: 0.85rem;
+  font-style: italic;
+}
+
+@media (min-width: 700px) {
+  .project-detail__body {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .project-detail__thumb {
+    animation: none !important;
+  }
+}

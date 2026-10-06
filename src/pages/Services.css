@@ -1,0 +1,16 @@
+.page-hero {
+  padding-bottom: 24px;
+}
+
+.page-hero h1 {
+  max-width: 20ch;
+}
+
+.page-hero__sub {
+  font-size: 1.05rem;
+  max-width: 56ch;
+}
+
+.services-grid-section {
+  padding-top: 0;
+}

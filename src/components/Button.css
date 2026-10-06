@@ -1,0 +1,130 @@
+.btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  line-height: 1.2;
+  border-radius: 10px;
+  padding: 13px 22px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  white-space: nowrap;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    transform var(--dur-fast) var(--ease-out),
+    background-color var(--dur-base) var(--ease-soft),
+    background var(--dur-base) var(--ease-soft),
+    border-color var(--dur-base) var(--ease-soft),
+    box-shadow var(--dur-base) var(--ease-soft),
+    color var(--dur-base) var(--ease-soft);
+}
+
+/* Trailing icon nudges forward on hover; the leading icon must not move. */
+.btn__icon {
+  transition: transform var(--dur-base) var(--ease-out);
+}
+
+.btn:hover .btn__icon {
+  transform: translateX(3px);
+}
+
+.btn:active .btn__icon {
+  transform: translateX(1px);
+}
+
+.btn--sm {
+  padding: 9px 16px;
+  font-size: 0.9rem;
+}
+
+.btn--lg {
+  padding: 15px 28px;
+  font-size: 1rem;
+}
+
+.btn--block {
+  width: 100%;
+}
+
+/* Primary --------------------------------------------------------------- */
+
+.btn--primary {
+  background: var(--color-primary);
+  color: #fff;
+  box-shadow: var(--btn-primary-shadow);
+}
+
+[data-theme='dark'] .btn--primary {
+  background: var(--brand-gradient);
+  color: #fff;
+}
+
+.btn--primary:hover {
+  background: var(--color-primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 26px rgba(22, 58, 92, 0.28);
+}
+
+[data-theme='dark'] .btn--primary:hover {
+  background: linear-gradient(135deg, #5aa0ff, #7b62f0);
+  box-shadow: 0 12px 28px rgba(77, 163, 255, 0.30);
+}
+
+.btn--primary:active {
+  transform: translateY(0) scale(0.98);
+  box-shadow: var(--btn-primary-shadow);
+}
+
+/* Secondary ------------------------------------------------------------- */
+
+.btn--secondary {
+  background: var(--color-surface);
+  color: var(--color-heading);
+  border-color: var(--color-border);
+}
+
+.btn--secondary:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-card);
+}
+
+.btn--secondary:active {
+  transform: translateY(0) scale(0.98);
+}
+
+/* Ghost ----------------------------------------------------------------- */
+
+.btn--ghost {
+  background: transparent;
+  color: var(--color-heading);
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+.btn--ghost:hover {
+  color: var(--color-accent);
+  transform: translateY(-1px);
+}
+
+.btn--ghost:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.btn:disabled,
+.btn[aria-disabled='true'] {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.btn:disabled .btn__icon,
+.btn[aria-disabled='true'] .btn__icon {
+  transform: none;
+}

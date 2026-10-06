@@ -1,0 +1,124 @@
+.site-footer {
+  background: var(--brand-navy);
+  color: #cdd8e3;
+  padding-top: 56px;
+  transition: background-color 0.22s var(--ease-soft);
+}
+
+[data-theme='dark'] .site-footer {
+  background: #070b16;
+  border-top: 1px solid var(--color-border);
+}
+
+.site-footer .brand {
+  display: inline-flex;
+  align-self: flex-start;
+}
+
+.site-footer p {
+  color: #a9b8c8;
+  max-width: 34ch;
+}
+
+.site-footer__motto {
+  font-size: 0.78rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #8aa4ff !important;
+  margin: 0;
+}
+
+.site-footer__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+  padding-bottom: 40px;
+}
+
+.site-footer__brand {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.site-footer__socials {
+  display: flex;
+  gap: 14px;
+}
+
+.site-footer__socials a {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.06);
+  display: grid;
+  place-items: center;
+  color: #cdd8e3;
+  transition:
+    background-color var(--dur-base) var(--ease-soft),
+    color var(--dur-base) var(--ease-soft),
+    transform var(--dur-fast) var(--ease-out),
+    box-shadow var(--dur-base) var(--ease-soft);
+}
+
+.site-footer__socials a:hover {
+  background: var(--brand-gradient);
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(77, 163, 255, 0.28);
+}
+
+.site-footer__socials a:active {
+  transform: translateY(0) scale(0.94);
+}
+
+.site-footer__socials svg {
+  transition: transform var(--dur-base) var(--ease-out);
+}
+
+.site-footer__socials a:hover svg {
+  transform: scale(1.08);
+}
+
+.site-footer__col h4 {
+  color: #fff;
+  font-size: 0.95rem;
+  margin-bottom: 14px;
+}
+
+.site-footer__col ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 0.92rem;
+}
+
+.site-footer__col a {
+  display: inline-block;
+  transition: color var(--dur-fast) var(--ease-soft), transform var(--dur-fast) var(--ease-out);
+}
+
+.site-footer__col a:hover {
+  color: #fff;
+  transform: translateX(4px);
+}
+
+.site-footer__bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 20px 24px;
+  font-size: 0.85rem;
+  color: #8ea0b3;
+}
+
+.site-footer__bottom p {
+  margin: 0;
+}
+
+@media (min-width: 720px) {
+  .site-footer__grid {
+    grid-template-columns: 1.4fr 1fr 1fr 1.2fr;
+  }
+}

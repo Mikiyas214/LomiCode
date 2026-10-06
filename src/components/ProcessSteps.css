@@ -1,0 +1,90 @@
+.process-steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 28px;
+  counter-reset: step;
+}
+
+.process-steps__item {
+  display: flex;
+  gap: 18px;
+  align-items: flex-start;
+  position: relative;
+  transition: transform var(--dur-base) var(--ease-out);
+}
+
+.process-steps__item:hover {
+  transform: translateY(-3px);
+}
+
+.process-steps__index {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  font-family: var(--font-display);
+  font-weight: 700;
+  transition:
+    transform var(--dur-base) var(--ease-out),
+    box-shadow var(--dur-base) var(--ease-soft);
+}
+
+[data-theme='dark'] .process-steps__index {
+  background: var(--brand-gradient);
+  color: #fff;
+}
+
+.process-steps__item:hover .process-steps__index {
+  transform: scale(1.06);
+  box-shadow: 0 0 0 6px var(--glow);
+}
+
+.process-steps__item h3 {
+  margin-bottom: 4px;
+  transition: color var(--dur-base) var(--ease-soft);
+}
+
+.process-steps__item:hover h3 {
+  color: var(--color-accent);
+}
+
+.process-steps__item p {
+  margin-bottom: 0;
+}
+
+/* Connector rail between the numbered steps on wide screens. */
+@media (min-width: 800px) {
+  .process-steps {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+  }
+
+  .process-steps__item {
+    flex-direction: column;
+  }
+
+  .process-steps__item:not(:last-child)::before {
+    content: '';
+    position: absolute;
+    top: 20px;
+    left: 56px;
+    right: -24px;
+    height: 2px;
+    border-radius: 2px;
+    background: linear-gradient(90deg, var(--color-accent), var(--color-accent-strong));
+    opacity: 0.28;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .process-steps__item::before {
+    display: none;
+  }
+}

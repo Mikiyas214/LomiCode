@@ -1,0 +1,114 @@
+.faq-list {
+  max-width: 760px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.faq-item {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  transition:
+    border-color var(--dur-base) var(--ease-soft),
+    box-shadow var(--dur-base) var(--ease-soft),
+    background-color 0.22s var(--ease-soft);
+}
+
+.faq-item:hover {
+  border-color: var(--color-border-strong);
+}
+
+.faq-item.is-open {
+  border-color: color-mix(in srgb, var(--color-accent) 45%, var(--color-border));
+  box-shadow: var(--shadow-card);
+}
+
+.faq-item h3 {
+  margin: 0;
+}
+
+.faq-item__trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  text-align: left;
+  background: none;
+  border: 0;
+  padding: 18px 20px;
+  font-family: var(--font-display);
+  font-size: 1.02rem;
+  font-weight: 600;
+  color: var(--color-heading);
+  transition: color var(--dur-fast) var(--ease-soft);
+}
+
+.faq-item__trigger:hover {
+  color: var(--color-accent);
+}
+
+.faq-item__trigger span {
+  transition: transform var(--dur-base) var(--ease-out);
+}
+
+.faq-item__trigger:hover span {
+  transform: translateX(2px);
+}
+
+.faq-item__trigger svg {
+  flex-shrink: 0;
+  color: var(--color-accent);
+  transition: transform var(--dur-slow) var(--ease-out);
+}
+
+.faq-item.is-open .faq-item__trigger svg {
+  transform: rotate(180deg);
+}
+
+/* Height is animated via grid-template-rows so the panel can size itself to
+   its content — no hard-coded max-height to drift out of sync. */
+.faq-item__panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows var(--dur-slow) var(--ease-out);
+}
+
+.faq-item.is-open .faq-item__panel {
+  grid-template-rows: 1fr;
+}
+
+.faq-item__inner {
+  overflow: hidden;
+  /* Fades and lifts as the row expands, so the answer reads as arriving
+     rather than being revealed by a sliding curtain. */
+  opacity: 0;
+  transform: translate3d(0, -6px, 0);
+  transition:
+    opacity var(--dur-base) var(--ease-soft),
+    transform var(--dur-base) var(--ease-out);
+}
+
+.faq-item.is-open .faq-item__inner {
+  opacity: 1;
+  transform: none;
+  transition-delay: 0.08s;
+}
+
+.faq-item__inner p {
+  margin: 0;
+  padding: 0 20px 18px;
+  max-width: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .faq-item__panel,
+  .faq-item__inner,
+  .faq-item__trigger span,
+  .faq-item__trigger svg {
+    transition-duration: 0.001ms !important;
+  }
+}

@@ -1,0 +1,87 @@
+.testimonials__label {
+  font-size: 0.82rem;
+  color: var(--color-text-muted);
+  font-style: italic;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.testimonials__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+.testimonial {
+  position: relative;
+  padding: 26px;
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  transition:
+    transform var(--dur-base) var(--ease-out),
+    box-shadow var(--dur-base) var(--ease-soft),
+    border-color var(--dur-base) var(--ease-soft),
+    background-color 0.22s var(--ease-soft);
+}
+
+.testimonial:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-raised);
+  border-color: color-mix(in srgb, var(--color-accent) 32%, var(--color-border));
+}
+
+/* Oversized quote mark, tinted into the background. */
+.testimonial::before {
+  content: '\201C';
+  position: absolute;
+  top: -18px;
+  right: 14px;
+  font-family: var(--font-display);
+  font-size: 5rem;
+  line-height: 1;
+  color: var(--color-accent);
+  opacity: 0.10;
+  pointer-events: none;
+  transition: opacity var(--dur-slow) var(--ease-soft), transform var(--dur-slow) var(--ease-out);
+}
+
+.testimonial:hover::before {
+  opacity: 0.2;
+  transform: scale(1.06);
+}
+
+.testimonial p {
+  position: relative;
+  color: var(--color-text);
+  font-size: 1.02rem;
+  margin-bottom: 16px;
+}
+
+.testimonial footer {
+  display: flex;
+  flex-direction: column;
+  font-style: normal;
+}
+
+.testimonial__name {
+  font-weight: 600;
+  color: var(--color-heading);
+  font-size: 0.9rem;
+  transition: color var(--dur-base) var(--ease-soft);
+}
+
+.testimonial:hover .testimonial__name {
+  color: var(--color-accent);
+}
+
+.testimonial__role {
+  font-size: 0.82rem;
+  color: var(--color-text-muted);
+}
+
+@media (min-width: 800px) {
+  .testimonials__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

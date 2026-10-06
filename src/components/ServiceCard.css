@@ -1,0 +1,92 @@
+.service-card {
+  position: relative;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  overflow: hidden;
+  transition:
+    transform var(--dur-base) var(--ease-out),
+    box-shadow var(--dur-base) var(--ease-soft),
+    border-color var(--dur-base) var(--ease-soft),
+    background-color 0.22s var(--ease-soft);
+}
+
+/* A soft accent wash fades in behind the card on hover. */
+.service-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    420px circle at var(--spot-x, 50%) var(--spot-y, 0%),
+    var(--glow),
+    transparent 65%
+  );
+  opacity: 0;
+  transition: opacity var(--dur-slow) var(--ease-soft);
+}
+
+.service-card:hover::before,
+.service-card:focus-within::before {
+  opacity: 1;
+}
+
+.service-card:hover,
+.service-card:focus-within {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-raised);
+  border-color: color-mix(in srgb, var(--color-accent) 40%, var(--color-border));
+}
+
+.service-card h3 {
+  position: relative;
+  transition: color var(--dur-base) var(--ease-soft);
+}
+
+.service-card:hover h3,
+.service-card:focus-within h3 {
+  color: var(--color-accent);
+}
+
+.service-card__outcomes {
+  position: relative;
+  list-style: none;
+  margin: 6px 0 12px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.service-card__outcomes li {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 0.92rem;
+  color: var(--color-text);
+}
+
+.service-card__outcomes svg {
+  color: var(--color-accent);
+  flex-shrink: 0;
+  margin-top: 3px;
+  transition: transform var(--dur-base) var(--ease-out);
+}
+
+.service-card:hover .service-card__outcomes svg,
+.service-card:focus-within .service-card__outcomes svg {
+  transform: translateY(-1px) scale(1.08);
+}
+
+.service-card .btn--ghost {
+  position: relative;
+  margin-top: auto;
+  align-self: flex-start;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .service-card::before {
+    display: none;
+  }
+}

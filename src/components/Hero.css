@@ -1,0 +1,293 @@
+.hero {
+  position: relative;
+  padding-top: clamp(48px, 8vw, 88px);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* Background ----------------------------------------------------------- */
+
+.hero__glow {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.hero__orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(40px);
+  opacity: 0.55;
+  will-change: transform;
+  animation: orbDrift 18s var(--ease-soft) infinite alternate;
+}
+
+.hero__orb--a {
+  width: 280px;
+  height: 280px;
+  top: -40px;
+  right: 8%;
+  background: radial-gradient(circle, rgba(77, 163, 255, 0.35), transparent 68%);
+}
+
+.hero__orb--b {
+  width: 240px;
+  height: 240px;
+  bottom: 10%;
+  left: -40px;
+  background: radial-gradient(circle, rgba(155, 108, 255, 0.28), transparent 68%);
+  animation-delay: -6s;
+  animation-duration: 24s;
+}
+
+@keyframes orbDrift {
+  from { transform: translate3d(0, 0, 0) scale(1); }
+  to { transform: translate3d(18px, -14px, 0) scale(1.06); }
+}
+
+/* Faint grid texture — reads as structure without competing with the copy. */
+.hero__grid-lines {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--color-border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--color-border) 1px, transparent 1px);
+  background-size: 56px 56px;
+  opacity: 0.4;
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000 20%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000 20%, transparent 75%);
+}
+
+/* Layout --------------------------------------------------------------- */
+
+.hero__grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 48px;
+  align-items: center;
+}
+
+.hero__copy {
+  position: relative;
+  z-index: 1;
+}
+
+.hero__sub {
+  font-size: 1.08rem;
+  max-width: 46ch;
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 8px;
+}
+
+/* Entrance ------------------------------------------------------------- */
+
+.hero-anim {
+  animation: heroEnter 0.7s var(--ease-out) both;
+}
+
+.hero-anim--1 { animation-delay: 0.04s; }
+.hero-anim--2 { animation-delay: 0.12s; }
+.hero-anim--3 { animation-delay: 0.26s; }
+.hero-anim--4 { animation-delay: 0.38s; }
+
+@keyframes heroEnter {
+  from { opacity: 0; transform: translate3d(0, 18px, 0); }
+  to { opacity: 1; transform: none; }
+}
+
+/* Word-by-word headline. Each word fades and rises in sequence; the delays
+   sit inside the .hero-anim--2 window so the block behaves as one unit. */
+.hero__word {
+  display: inline-block;
+  opacity: 0;
+  transform: translate3d(0, 0.45em, 0);
+  animation: heroWord 0.62s var(--ease-out) both;
+}
+
+.hero__word:nth-child(1) { animation-delay: 0.14s; }
+.hero__word:nth-child(2) { animation-delay: 0.20s; }
+.hero__word:nth-child(3) { animation-delay: 0.26s; }
+.hero__word:nth-child(4) { animation-delay: 0.32s; }
+.hero__word:nth-child(5) { animation-delay: 0.38s; }
+.hero__word:nth-child(6) { animation-delay: 0.44s; }
+.hero__word:nth-child(7) { animation-delay: 0.50s; }
+.hero__word:nth-child(8) { animation-delay: 0.56s; }
+.hero__word:nth-child(n + 9) { animation-delay: 0.62s; }
+
+@keyframes heroWord {
+  from { opacity: 0; transform: translate3d(0, 0.45em, 0); }
+  to { opacity: 1; transform: none; }
+}
+
+/* Visual panel --------------------------------------------------------- */
+
+.hero__visual {
+  position: relative;
+  min-height: 280px;
+  animation: heroEnter 0.8s var(--ease-out) 0.30s both;
+}
+
+.hero-logo-wrap {
+  position: relative;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.04), transparent),
+    var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-raised);
+  padding: 18px;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  transition: var(--theme-shift), transform 0.4s var(--ease-out),
+    box-shadow 0.4s var(--ease-soft);
+}
+
+.hero-logo-wrap:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 50px rgba(20, 30, 45, 0.16);
+}
+
+[data-theme='dark'] .hero-logo-wrap:hover {
+  box-shadow: 0 20px 54px rgba(0, 0, 0, 0.45);
+}
+
+.hero-logo-wrap .brand-logo {
+  border-radius: 18px;
+}
+
+/* A slow diagonal highlight travels across the logo plate once on load. */
+.hero-logo-wrap__sheen {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    105deg,
+    transparent 35%,
+    var(--highlight-sweep) 48%,
+    transparent 62%
+  );
+  transform: translateX(-100%);
+  animation: sheenSweep 1.6s var(--ease-soft) 0.85s;
+}
+
+@keyframes sheenSweep {
+  to { transform: translateX(100%); }
+}
+
+/* Mock panel ----------------------------------------------------------- */
+
+.mock-line {
+  height: 9px;
+  border-radius: 6px;
+  background: var(--color-surface-alt);
+  margin-bottom: 8px;
+}
+.mock-line--wide { width: 92%; }
+.mock-line--mid { width: 62%; }
+.mock-line--tiny { width: 40%; height: 7px; }
+
+.mock-panel {
+  position: absolute;
+  right: -6px;
+  bottom: -28px;
+  width: 58%;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-raised);
+  padding: 18px;
+  transition: var(--theme-shift), transform 0.4s var(--ease-out);
+}
+
+/* Slow float, paused on hover so it settles while being looked at. */
+.mock-panel {
+  animation: floatPanel 7s var(--ease-soft) 1.4s infinite alternate;
+}
+
+.mock-panel:hover {
+  animation-play-state: paused;
+}
+
+@keyframes floatPanel {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(0, -8px, 0); }
+}
+
+.mock-panel__head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.mock-dot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: var(--color-border);
+}
+.mock-dot--accent { background: var(--color-accent); }
+
+.mock-bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  height: 74px;
+}
+
+.mock-bar {
+  flex: 1;
+  height: var(--bar-h, 50%);
+  border-radius: 5px 5px 0 0;
+  background: linear-gradient(180deg, #4da3ff, #163a5c);
+  transform-origin: bottom;
+  animation: barGrow 0.7s var(--ease-out) both;
+}
+
+.mock-bar:nth-child(1) { animation-delay: 1.30s; }
+.mock-bar:nth-child(2) { animation-delay: 1.38s; }
+.mock-bar:nth-child(3) { animation-delay: 1.46s; }
+.mock-bar:nth-child(4) { animation-delay: 1.54s; }
+.mock-bar:nth-child(5) { animation-delay: 1.62s; }
+
+@keyframes barGrow {
+  from { transform: scaleY(0); }
+  to { transform: scaleY(1); }
+}
+
+.mock-bar:nth-child(even) {
+  background: linear-gradient(180deg, #9b6cff, #3d2a7a);
+}
+
+@media (min-width: 900px) {
+  .hero__grid {
+    grid-template-columns: 1fr 0.95fr;
+    gap: 64px;
+  }
+  .hero__visual {
+    min-height: 360px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__orb,
+  .hero__visual,
+  .mock-panel,
+  .mock-bar,
+  .hero-logo-wrap__sheen {
+    animation: none !important;
+  }
+
+  .hero__word {
+    opacity: 1;
+    transform: none;
+  }
+}

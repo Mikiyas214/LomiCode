@@ -1,0 +1,97 @@
+.team-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 22px;
+}
+
+.team-card {
+  position: relative;
+  padding: 28px;
+  height: 100%;
+  overflow: hidden;
+  transition:
+    transform var(--dur-base) var(--ease-out),
+    box-shadow var(--dur-base) var(--ease-soft),
+    border-color var(--dur-base) var(--ease-soft);
+}
+
+.team-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-raised);
+  border-color: color-mix(in srgb, var(--color-accent) 35%, var(--color-border));
+}
+
+.team-card__avatar {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  font-family: var(--font-display);
+  font-weight: 700;
+  margin-bottom: 14px;
+  transition: transform var(--dur-base) var(--ease-out), box-shadow var(--dur-base) var(--ease-soft);
+}
+
+[data-theme='dark'] .team-card__avatar {
+  background: var(--brand-gradient);
+}
+
+.team-card:hover .team-card__avatar {
+  transform: scale(1.05);
+  box-shadow: 0 0 0 6px var(--glow);
+}
+
+.team-card__role {
+  color: var(--color-accent);
+  font-weight: 600;
+  font-size: 0.88rem;
+  margin-bottom: 10px;
+}
+
+.team-card h3 {
+  transition: color var(--dur-base) var(--ease-soft);
+}
+
+.team-card:hover h3 {
+  color: var(--color-accent);
+}
+
+.values-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  border-top: 1px solid var(--color-border);
+}
+
+.values-list__item {
+  padding: 20px 0;
+  border-bottom: 1px solid var(--color-border);
+  transition: border-color var(--dur-base) var(--ease-soft);
+}
+
+.values-list__item:hover {
+  border-bottom-color: var(--color-accent);
+}
+
+.values-list__item h3 {
+  margin-bottom: 4px;
+  transition: color var(--dur-base) var(--ease-soft), transform var(--dur-base) var(--ease-out);
+}
+
+.values-list__item:hover h3 {
+  color: var(--color-accent);
+  transform: translateX(3px);
+}
+
+.values-list__item p {
+  margin-bottom: 0;
+}
+
+@media (min-width: 700px) {
+  .team-grid { grid-template-columns: repeat(2, 1fr); }
+  .values-list { grid-template-columns: repeat(2, 1fr); }
+  .values-list__item { border-bottom: none; }
+}

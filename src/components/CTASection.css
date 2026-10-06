@@ -1,0 +1,93 @@
+.cta-section {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: linear-gradient(135deg, #163a5c 0%, #1c2150 100%);
+  padding: 56px 0;
+  transition: background 0.22s var(--ease-soft);
+}
+
+[data-theme='dark'] .cta-section {
+  background: linear-gradient(135deg, #12182b 0%, #1a1640 100%);
+}
+
+/* Slow brand-tinted movement so the band is not a flat block of colour. */
+.cta-section::before,
+.cta-section::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(50px);
+  pointer-events: none;
+  z-index: -1;
+}
+
+.cta-section::before {
+  width: 300px;
+  height: 300px;
+  top: -120px;
+  right: 6%;
+  background: radial-gradient(circle, rgba(77, 163, 255, 0.30), transparent 70%);
+  animation: orbDrift 20s var(--ease-soft) infinite alternate;
+}
+
+.cta-section::after {
+  width: 260px;
+  height: 260px;
+  bottom: -140px;
+  left: 4%;
+  background: radial-gradient(circle, rgba(155, 108, 255, 0.26), transparent 70%);
+  animation: orbDrift 26s var(--ease-soft) -8s infinite alternate-reverse;
+}
+
+@keyframes orbDrift {
+  from { transform: translate3d(0, 0, 0) scale(1); }
+  to { transform: translate3d(20px, -16px, 0) scale(1.08); }
+}
+
+.cta-section__inner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: flex-start;
+}
+
+.cta-section h2 {
+  color: #fff;
+  margin-bottom: 8px;
+}
+
+.cta-section p {
+  color: #c9d6e2;
+  margin-bottom: 0;
+}
+
+.cta-section .btn--primary,
+[data-theme='dark'] .cta-section .btn--primary {
+  background: #fff;
+  color: #10233a;
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.22);
+}
+
+.cta-section .btn--primary:hover,
+[data-theme='dark'] .cta-section .btn--primary:hover {
+  background: #e8eef8;
+  color: #10233a;
+  transform: translateY(-2px);
+}
+
+@media (min-width: 760px) {
+  .cta-section__inner {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cta-section::before,
+  .cta-section::after {
+    animation: none !important;
+  }
+}
